@@ -1,5 +1,5 @@
 'use strict';
-spaApp_book.config(['$routeProvider', function($routeProvider) {
+libApp_book.config(['$routeProvider', function($routeProvider) {
   $routeProvider
 	.when('/book/index', {
 		templateUrl: 'views/book/index.html',
@@ -33,14 +33,14 @@ spaApp_book.config(['$routeProvider', function($routeProvider) {
 	});
 }]);
 
-spaApp_book.controller('index', ['$scope', '$http', 'services', 
+libApp_book.controller('index', ['$scope', '$http', 'services', 
 	function($scope,$http,services) {
 	$scope.message = 'Everyone come and see how good I look!';
 	services.getBooks().then(function(data){
         $scope.books = data.data;
     });	
 	$scope.deleteBook = function(bookID) {
-		if(confirm("Are you sure to delete book number: " + bookID + "access-token=100-token")==true && bookID>0){
+		if(confirm("Are you sure to delete book number: " + bookID)==true && bookID>0){
 			services.deleteBook(bookID);	
 			$route.reload();
 		}

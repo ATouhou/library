@@ -1,13 +1,16 @@
 'use strict';
 
-var app = angular.module('app', [
+var libApp = angular.module('app', [
     'ngRoute',          //$routeProvider
     'mgcrea.ngStrap',   //bs-navbar, data-match-route directives
     'controllers',
+    'libApp.book',
     'ngAnimate'       //Our module frontend/web/js/controllers.js
 ]);
 
-app.config(['$routeProvider', '$httpProvider',
+var libApp_book = angular.module('libApp.book', ['ngRoute']);
+
+libApp.config(['$routeProvider', '$httpProvider',
     function($routeProvider, $httpProvider) {
         $routeProvider.
             when('/', {
@@ -28,10 +31,6 @@ app.config(['$routeProvider', '$httpProvider',
                 templateUrl: 'partials/dashboard.html',
                 controller: 'DashboardController'
             }).
-            when('/book/index', {
-                templateUrl: 'views/book/index.html',
-                controller: 'index'
-            }).
             otherwise({
                 templateUrl: 'partials/404.html'
             });
@@ -39,7 +38,7 @@ app.config(['$routeProvider', '$httpProvider',
     }
 ]);
 
-app.factory('authInterceptor', function ($q, $window, $location) {
+libApp.factory('authInterceptor', function ($q, $window, $location) {
     return {
         request: function (config) {
             if ($window.sessionStorage.access_token) {
