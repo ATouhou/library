@@ -6,7 +6,7 @@ libApp_book.factory("services", ['$http','$location','$route',
         return $http.get('book/getbooks');
     }	
 	obj.createBook = function (book) {
-		return $http.post( serviceBase + 'books', book )
+		return $http.post( 'book/create', book )
 			.then( successHandler )
 			.catch( errorHandler );
 		function successHandler( result ) {
