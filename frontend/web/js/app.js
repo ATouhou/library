@@ -5,7 +5,8 @@ var libApp = angular.module('app', [
     'mgcrea.ngStrap',   //bs-navbar, data-match-route directives
     'controllers',
     'libApp.book',
-    'ngAnimate'       //Our module frontend/web/js/controllers.js
+    'ngAnimate',
+    'ui.bootstrap'       //Our module frontend/web/js/controllers.js
 ]);
 
 var libApp_book = angular.module('libApp.book', ['ngRoute']);
@@ -29,7 +30,8 @@ libApp.config(['$routeProvider', '$httpProvider',
             }).
             when('/dashboard', {
                 templateUrl: 'partials/dashboard.html',
-                controller: 'DashboardController'
+                controller: 'DashboardController',
+                title: 'Library Dashboard'
             }).
             otherwise({
                 templateUrl: 'partials/404.html'

@@ -1,7 +1,5 @@
 <div>
-	<h1>BOOK CRUD</h1>
-	
-	<p>{{ message }}</p>
+	<h1>Add BOOK</h1>
 	<form role="form" name="myForm">
 		<div class= "form-group" ng-class="{error: myForm.title.$invalid}">
 			<label> Title </label>
@@ -28,6 +26,16 @@
 			<div>
 			<input name="publisher" ng-model="book.publisher" type= "text" class= "form-control" placeholder="Publisher" required/>
 			<span ng-show="myForm.publisher.$dirty && myForm.publisher.$invalid" class="help-inline">Publisher Required</span>
+			</div>
+		</div>
+		<div class= "form-group" ng-class="{error: myForm.publisher.$invalid}">
+			<label> Category </label>
+			<div>
+			<select name="cat_id" ng-model="book.cat_id" type= "text" class= "form-control" placeholder="Category" required>
+			<option selected>Select Category</option>
+			<option ng-repeat="category in bookCatz" value="{{category.cat_id}}">{{category.cat_name}}</option>
+			</select>
+			<span ng-show="myForm.cat_id.$dirty && myForm.cat_id.$invalid" class="help-inline">Publisher Required</span>
 			</div>
 		</div>
 		<div class= "form-group" ng-class="{error: myForm.year.$invalid}">

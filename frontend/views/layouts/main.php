@@ -11,7 +11,7 @@ AppAsset::register($this);
 <head>
 <meta charset="<?= Yii::$app->charset ?>">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>My Angular Yii Application</title>
+<title ng-bind="title">My Angular Yii Application</title>
 <?php $this->head() ?>
 
 <script>paceOptions = {ajax: {trackMethods: ['GET', 'POST']}};</script>

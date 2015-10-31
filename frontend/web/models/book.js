@@ -1,6 +1,6 @@
 'use strict';
-libApp_book.factory("services", ['$http','$location','$route', 
-	function($http,$location,$route) {
+libApp_book.factory("services", ['$http','$location','$route', 'Flash',
+	function($http,$location,$route,Flash) {
     var obj = {};
     obj.getBooks = function(){
         return $http.get('book/getbooks');
@@ -13,11 +13,13 @@ libApp_book.factory("services", ['$http','$location','$route',
 			.then( successHandler )
 			.catch( errorHandler );
 		function successHandler( result ) {
-			$location.path('/book/index');			
+			Flash.setMessage("Book added!",true);
+			$location.path('/book/index')			
 		}
 		function errorHandler( result ){
-			alert("Error data")
-			$location.path('/book/create')
+			alert("Error data");
+			Flash.setMessage("Book not saved!",false);
+			$location.path('/book/index')
 		}
 	};
 	obj.createCategory = function (bookCategory) {
