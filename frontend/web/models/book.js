@@ -5,6 +5,9 @@ libApp_book.factory("services", ['$http','$location','$route',
     obj.getBooks = function(){
         return $http.get('book/getbooks');
     }	
+	obj.getBooksCat = function(){
+        return $http.get('bookcategory/getbookscategories');
+    }
 	obj.createBook = function (book) {
 		return $http.post( 'book/create', book )
 			.then( successHandler )
@@ -16,7 +19,19 @@ libApp_book.factory("services", ['$http','$location','$route',
 			alert("Error data")
 			$location.path('/book/create')
 		}
-	};	
+	};
+	obj.createCategory = function (bookCategory) {
+		return $http.post( 'bookcategory/create', bookCategory )
+			.then( successHandler )
+			.catch( errorHandler );
+		function successHandler( result ) {
+			$location.path('/book/categories');			
+		}
+		function errorHandler( result ){
+			alert("Error data")
+			$location.path('bookcategory/create')
+		}
+	};		
 	obj.getBook = function(bookID){
         return $http.get(serviceBase + 'books/' + bookID + "?access-token=100-token");
     }

@@ -63,8 +63,8 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; <a href="http://blog.neattutorials.com">Neat Tutorials</a> <?= date('Y') ?></p>
-        <p class="pull-right"><?= Yii::powered() ?> <?= Yii::getVersion() ?></p>
+        <p class="pull-left">&copy; <a href="http://arrowsoft.co">Arrowsoft</a> <?= date('Y') ?></p>
+        <p class="pull-right"> Arrowsoft</p>
     </div>
 </footer>
 
