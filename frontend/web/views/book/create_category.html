@@ -1,8 +1,18 @@
 <div>
-	<h1>BOOK Category CRUD</h1>
+<br />
+<br />
+<br />
+<br />
+<br />
 	
-	<p>{{ message }}</p>
-	<form role="form" name="myForm">
+	
+    <div class="row">
+    	<div class="col-md-6 col-md-offset-3">
+        <div class="panel panel-default">
+  <div class="panel-heading">Add Book Category</div>
+  <div class="panel-body">
+  <p>{{ message }}</p>
+        	<form role="form" name="myForm">
 		<div class= "form-group" ng-class="{error: myForm.title.$invalid}">
 			<label> Title </label>
 			<div>
@@ -17,10 +27,15 @@
 			<span ng-show="myForm.shelfNo.$dirty && myForm.shelfNo.$invalid" class="help-inline">Year Required</span>
 			</div>
 		</div>
-	  
-		<a href="#/book/categories" class="btn btn-default">Cancel</a>
+	 
+		<a href="#/book/categories" class="btn btn-danger">Cancel</a>
 		<button ng-click="createCategory(bookCategory);" 
                 ng-disabled="myForm.$invalid"
-                type="submit" class="btn btn-default">Submit</button>
+                type="submit" class="btn btn-primary">Submit</button>
 	</form>
+    </div>
+    </div>
+        </div>
+    </div>
+	
 </div>

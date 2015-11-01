@@ -89,3 +89,7 @@ a.desc:after {
     padding: 10px 20px;
     margin: 0 0 15px 0;
 }
+.panel-default > .panel-heading{ background:#34AADC; color:#FFF; font-weight:bold; font-size:16px;}
+.panel-default{ background:rgba(224, 248, 216, 0.26);-webkit-box-shadow: 0px 0px 10px 1px rgba(199,199,199,1);
+-moz-box-shadow: 0px 0px 10px 1px rgba(199,199,199,1);
+box-shadow: 0px 0px 10px 1px rgba(199,199,199,1);}
