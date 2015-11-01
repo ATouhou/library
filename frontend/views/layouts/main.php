@@ -24,7 +24,7 @@ AppAsset::register($this);
     <nav class="navbar navbar-default navbar-fixed-top navbar-inner" role="navigation" bs-navbar>
         <div class="container">
             <div class="navbar-header">
-                <button ng-init="navCollapsed = true" ng-click="navCollapsed = !navCollapsed" type="button" class="navbar-toggle">
+                <button ng-init="navCollapsed = true" ng-click="navCollapsed = !navCollapsed" type="button" class="navbar-toggle" >
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
