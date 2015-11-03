@@ -64,7 +64,7 @@ libApp_book.factory("services", ['$http','$location','$route', 'Flash',
 			$location.path('/book/categories');
 		}
 		function errorHandler( result ){
-			Flash.setMessage("Book category not updated!",true);
+			Flash.setMessage("Book category not updated!",false);
 			$location.path('/book/updateCat/' + bookCat.id)
 		}	
 	};	
@@ -90,7 +90,7 @@ libApp_book.factory("services", ['$http','$location','$route', 'Flash',
 		}
 		function errorHandler( result ){
 			alert("Error data");
-			Flash.setMessage("Book categorycan not be deleted!",true);
+			Flash.setMessage("Book categorycan not be deleted!",false);
 			$route.reload();
 		}	
 	};	

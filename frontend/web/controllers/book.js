@@ -70,7 +70,7 @@ libApp_book.run(['$location', '$rootScope', function($location, $rootScope) {
         }
 		 // If there is a flash message set focus to it - trumps all focus
         if($rootScope.flashMsg != ""){
-            $('#flash-message a').attr("tabIndex", 0).focus();
+            $('#flash-message-sucess a').attr("tabIndex", 0).focus();
         }
     });
 }]);
@@ -90,11 +90,11 @@ libApp_book.factory("Flash", function($rootScope) {
             queue.push(message);
             $rootScope.flashMsg = message;
 			if(status){
-				$rootScope.successCls = true;
-				$rootScope.errorCls = false;
+				$rootScope.successCls = 'true';
+				$rootScope.errorCls = 'false';
 			}else{
-				$rootScope.successCls = false;
-				$rootScope.errorCls = true;
+				$rootScope.successCls = 'false';
+				$rootScope.errorCls = 'true';
 			}
         },
         getMessage: function() {
