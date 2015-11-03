@@ -15,8 +15,6 @@ AppAsset::register($this);
 <?php $this->head() ?>
 
 <script>paceOptions = {ajax: {trackMethods: ['GET', 'POST']}};</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.js"></script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/red/pace-theme-minimal.css" rel="stylesheet" />
 </head>
 <body ng-controller="MainController">
 <?php $this->beginBody() ?>

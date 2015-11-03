@@ -23,7 +23,7 @@ class BookcategoryController extends Controller
         $behaviors = parent::behaviors();
         $behaviors['authenticator'] = [
             'class' => HttpBearerAuth::className(),
-            'only' => ['create'],
+            'only' => ['create','getcatbyid'],
         ];
         $behaviors['contentNegotiator'] = [
             'class' => ContentNegotiator::className(),
@@ -33,10 +33,10 @@ class BookcategoryController extends Controller
         ];
         $behaviors['access'] = [
             'class' => AccessControl::className(),
-            'only' => ['create'],
+            'only' => ['create','getcatbyid'],
             'rules' => [
                 [
-                    'actions' => ['create'],
+                    'actions' => ['create','getcatbyid'],
                     'allow' => true,
                     'roles' => ['@'],
                 ],
@@ -49,29 +49,26 @@ class BookcategoryController extends Controller
      * Lists all Bookcategory models.
      * @return mixed
      */
-    public function actionIndex()
-    {
+     public function actionGetbookscategories()
+     {
         $searchModel = new BookCatSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
-    }
+       
+        return $searchModel->search(null);
+     }
 
     /**
      * Displays a single Bookcategory model.
      * @param integer $id
      * @return mixed
      */
-    public function actionGetbookscategories()
-    {
-        $searchModel = new BookCatSearch();
-       
-        return $searchModel->search(null);
-    }
-
+   
+     public function actionGetcatbyid($id)
+     {
+        $searchModel = $this->findModel($id);
+        
+        return  $searchModel;
+     }
+     
     /**
      * Creates a new Bookcategory model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -97,13 +94,11 @@ class BookcategoryController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->cat_id]);
+        $model->attributes = Yii::$app->request->post();    
+        if ($model->save()) {
+            return $model;
         } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+            return $model->errors;
         }
     }
 
@@ -117,7 +112,7 @@ class BookcategoryController extends Controller
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        //return $this->redirect(['index']);
     }
 
     /**

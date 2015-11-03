@@ -38,8 +38,22 @@ libApp_book.config(['$routeProvider', function($routeProvider) {
           }
         }
 	})
+	.when('/book/update_cat/:catId', {
+		templateUrl: 'views/book/update_cat.html',
+		controller: 'updateCat',
+		resolve: {
+          bookCat: function(services, $route){
+            var catId = $route.current.params.catId;
+            return services.getBookCatById(catId);
+          }
+        }
+	})
 	.when('/book/delete/:bookId', {
 		templateUrl: 'views/book/index.html',
+		controller: 'delete',
+	})
+	.when('/book/delete/:bookCatId', {
+		templateUrl: 'views/book/view_categories.html',
 		controller: 'delete',
 	})
 	.otherwise({
@@ -109,24 +123,25 @@ libApp_book.controller('index', ['$scope','$rootScope', '$http', 'services', 'Fl
 	$scope.deleteBook = function(bookID) {
 		if(confirm("Are you sure to delete book number: " + bookID)==true && bookID>0){
 			services.deleteBook(bookID);	
-			$route.reload();
+			//$route.reload();
 		}
 	};
 	 
 }])
-.controller('catIndex', ['$scope', '$http', 'services', 
-	function($scope,$http,services) {
+.controller('catIndex', ['$scope', '$http', 'services','Flash', 
+	function($scope,$http,services,Flash) {
 	$scope.message = 'Category list here';
 	$scope.bookCatz = this;
+	$scope.flash = Flash;
 	services.getBooksCat().then(function(data){
         $scope.bookCatz = data.data;
 		
     });	
 	
-	$scope.deleteBook = function(bookID) {
-		if(confirm("Are you sure to delete book number: " + bookID)==true && bookID>0){
-			services.deleteBook(bookID);	
-			$route.reload();
+	$scope.deleteBookCat = function(bookCatID) {
+		if(confirm("Are you sure to delete book number: " + bookCatID)==true && bookCatID>0){
+			services.deleteBookCat(bookCatID);	
+			//$route.reload();
 		}
 	};
 }])
@@ -162,4 +177,25 @@ libApp_book.controller('index', ['$scope','$rootScope', '$http', 'services', 'Fl
 	$scope.updateBook = function(book) {	
         var results = services.updateBook(book);
     } 
-}]);
+}])
+.controller('updateCat', ['$scope', '$http', '$routeParams', 'services','$location','bookCat', 
+	function($scope,$http,$routeParams,services,$location,bookCat) {
+	$scope.message = 'Update category';
+	var original = bookCat.data;
+	
+	console.log(original);
+	$scope.bookCat = angular.copy(original);
+	$scope.isClean = function() {
+		return angular.equals(original, $scope.bookCat);
+	}
+	$scope.updateBookCat = function(bookCat) {	
+        var results = services.updateBookCat(bookCat);
+    } 
+}])
+libApp_book.directive('actionNotification', function() {
+  return {
+    restrict: 'E',
+    templateUrl: 'partials/notificationDir.html'
+  };
+})
+;

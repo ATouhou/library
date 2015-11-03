@@ -8,6 +8,9 @@ libApp_book.factory("services", ['$http','$location','$route', 'Flash',
 	obj.getBooksCat = function(){
         return $http.get('bookcategory/getbookscategories');
     }
+	obj.getBookCatById = function(catId){
+        return $http.get('bookcategory/getcatbyid/?id='+catId);
+    }
 	obj.createBook = function (book) {
 		return $http.post( 'book/create', book )
 			.then( successHandler )
@@ -27,10 +30,12 @@ libApp_book.factory("services", ['$http','$location','$route', 'Flash',
 			.then( successHandler )
 			.catch( errorHandler );
 		function successHandler( result ) {
+			Flash.setMessage("Book category added!",true);
 			$location.path('/book/categories');			
 		}
 		function errorHandler( result ){
-			alert("Error data")
+			alert("Error data");
+			Flash.setMessage("Book category not saved!",true);
 			$location.path('bookcategory/create')
 		}
 	};		
@@ -49,6 +54,19 @@ libApp_book.factory("services", ['$http','$location','$route', 'Flash',
 			alert("Error data")
 			$location.path('/book/update/' + book.id)
 		}	
+	};
+	obj.updateBookCat = function (bookCat) {
+	    return $http.put('bookcategory/update/?id=' + bookCat.cat_id , bookCat )
+			.then( successHandler )
+			.catch( errorHandler );
+		function successHandler( result ) {
+			Flash.setMessage("Book category updated!",true);
+			$location.path('/book/categories');
+		}
+		function errorHandler( result ){
+			Flash.setMessage("Book category not updated!",true);
+			$location.path('/book/updateCat/' + bookCat.id)
+		}	
 	};	
 	obj.deleteBook = function (bookID) {
 	    return $http.delete(serviceBase + 'books/' + bookID + "?access-token=100-token")
@@ -59,6 +77,20 @@ libApp_book.factory("services", ['$http','$location','$route', 'Flash',
 		}
 		function errorHandler( result ){
 			alert("Error data")
+			$route.reload();
+		}	
+	};
+	obj.deleteBookCat = function (bookCatID) {
+	    return $http.post('bookcategory/delete/?id=' + bookCatID )
+			.then( successHandler )
+			.catch( errorHandler );
+		function successHandler( result ) {
+			Flash.setMessage("Book category deleted!",true);
+			$route.reload();
+		}
+		function errorHandler( result ){
+			alert("Error data");
+			Flash.setMessage("Book categorycan not be deleted!",true);
 			$route.reload();
 		}	
 	};	

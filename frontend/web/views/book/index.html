@@ -1,14 +1,6 @@
 <div>
 	<h1>BOOK List</h1>	
-<div id="flash-message" class="alert alert-success" ng-class="{ sucess: successCls, danger: errorCls }" ng-show="flash.getMessage()">
-  <p>
-    <a href="#clearAlertMessages" ng-click="flash.clearMessage($event);">
-      <strong>Success:</strong> {{flash.getMessage()}}
-      <span class="glyphicon glyphicon-remove" style="float:right"  aria-hidden="true"></span>
-      <span class="visuallyhidden">Click to hide message</span>
-    </a>
-  </p>
-</div>
+<action-notification></action-notification>
 	<div ng-show="books.length > 0">
 	<a class="btn btn-primary" href="#/book/create">
 		<i class="glyphicon glyphicon-plus"></i> Create

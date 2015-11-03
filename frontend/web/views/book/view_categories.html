@@ -1,6 +1,7 @@
 <div>
 	<h1>BOOK category</h1>	
 	<p>{{ message }}</p>
+	<action-notification></action-notification>
 	<div ng-show="bookCatz.length > 0">
 	<a class="btn btn-primary" href="#/book/create_cat">
 		<i class="glyphicon glyphicon-plus"></i> Create
@@ -17,10 +18,10 @@
 			<td>{{data.shelf_id}}</td>
 			
 			<td>
-			<a class="btn btn-primary btn-xs" href="#/book/update/{{data.id}}">
+			<a class="btn btn-primary btn-xs" href="#/book/update_cat/{{data.cat_id}}">
 				<i class="glyphicon glyphicon-pencil"></i>
 			</a> 
-			<a class="btn btn-danger btn-xs" ng-click="deleteBook(data.id)">
+			<a class="btn btn-danger btn-xs" ng-click="deleteBookCat(data.cat_id)">
 				<i class="glyphicon glyphicon-trash"></i>
 			</a>
 			</td>
