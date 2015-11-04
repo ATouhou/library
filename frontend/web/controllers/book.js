@@ -155,7 +155,6 @@ libApp_book.controller('index', ['$scope','$rootScope', '$http', 'services', 'Fl
 	$scope.bookCatz = this;
 	services.getBooksCat().then(function(data){
         $scope.bookCatz = data.data;
-		
     });	
 	  
 }])

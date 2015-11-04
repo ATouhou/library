@@ -30,11 +30,11 @@ class Book extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'author', 'description','publisher', 'year'], 'required'],
+            [['title', 'author', 'description','publisher','cat_id', 'year','isbn'], 'required'],
             [['description'], 'string'],
-            [['year'], 'integer'],
-            [['title'], 'string', 'max' => 255],
-            [['author', 'publisher'], 'string', 'max' => 50]
+            [['year','pages','stock','author_id','shelf_id'], 'integer'],
+            [['title','written_lang'], 'string', 'max' => 255],
+            [['author', 'publisher','book_number'], 'string', 'max' => 50]
         ];
     }
 

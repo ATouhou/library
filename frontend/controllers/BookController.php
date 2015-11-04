@@ -76,6 +76,7 @@ class BookController extends Controller
     {
         $model = new Book();
         $model->attributes = Yii::$app->request->post();
+        $model->cat_id = implode(",",Yii::$app->request->post('cat_id'));
         if ( $model->save()) {
             return $model;
         } else {
