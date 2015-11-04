@@ -33,7 +33,7 @@ libApp_book.config(['$routeProvider', function($routeProvider) {
 		controller: 'update',
 		resolve: {
           book: function(services, $route){
-            var bookId = $route.current.params.bookId + "?access-token=100-token";
+            var bookId = $route.current.params.bookId;
             return services.getBook(bookId);
           }
         }
@@ -165,10 +165,11 @@ libApp_book.controller('index', ['$scope','$rootScope', '$http', 'services', 'Fl
         var results = services.createCategory(bookCategory);
     }  
 }])
-.controller('update', ['$scope', '$http', '$routeParams', 'services','$location','book', 
-	function($scope,$http,$routeParams,services,$location,book) {
-	$scope.message = 'Contact us! JK. This is just a demo.';
+.controller('update', ['$scope', '$http', '$routeParams', 'services','$location','book','Flash', 
+	function($scope,$http,$routeParams,services,$location,book,Flash) {
+	$scope.message = 'Update Category';
 	var original = book.data;
+	$scope.flash = Flash;
 	$scope.book = angular.copy(original);
 	$scope.isClean = function() {
 		return angular.equals(original, $scope.book);

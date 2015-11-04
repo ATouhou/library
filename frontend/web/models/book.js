@@ -40,15 +40,27 @@ libApp_book.factory("services", ['$http','$location','$route', 'Flash',
 		}
 	};		
 	obj.getBook = function(bookID){
-        return $http.get(serviceBase + 'books/' + bookID + "?access-token=100-token");
+        return $http.get('book/getbookbyid?id=' + bookID);
     }
 	
 	obj.updateBook = function (book) {
-	    return $http.put(serviceBase + 'books/' + book.id + "access-token=100-token", book )
+	    return $http.put('book/update/?id=' + book.id, book )
 			.then( successHandler )
 			.catch( errorHandler );
 		function successHandler( result ) {
-			$location.path('/book/index');
+			console.log(result.data.error);
+			console.log(result);
+			if(!result.data.error)
+			{
+				Flash.setMessage("Book category updated!",true);
+				$location.path('/book/index');
+				
+			}
+			else{
+				Flash.setMessage("Book category not updated!",false);
+				$route.reload();
+			}
+			
 		}
 		function errorHandler( result ){
 			alert("Error data")
@@ -69,14 +81,15 @@ libApp_book.factory("services", ['$http','$location','$route', 'Flash',
 		}	
 	};	
 	obj.deleteBook = function (bookID) {
-	    return $http.delete(serviceBase + 'books/' + bookID + "?access-token=100-token")
+	    return $http.delete('book/delete/?id=' + bookID)
 			.then( successHandler )
 			.catch( errorHandler );
 		function successHandler( result ) {
+			Flash.setMessage("Book deleted!",true);
 			$route.reload();
 		}
 		function errorHandler( result ){
-			alert("Error data")
+			Flash.setMessage("Book can not be deleted!",false);
 			$route.reload();
 		}	
 	};
@@ -89,7 +102,6 @@ libApp_book.factory("services", ['$http','$location','$route', 'Flash',
 			$route.reload();
 		}
 		function errorHandler( result ){
-			alert("Error data");
 			Flash.setMessage("Book categorycan not be deleted!",false);
 			$route.reload();
 		}	

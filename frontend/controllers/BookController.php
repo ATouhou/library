@@ -60,11 +60,10 @@ class BookController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionView($id)
+    public function actionGetbookbyid($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+         return $this->findModel($id);
+       
     }
 
     /**
@@ -90,18 +89,23 @@ class BookController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($id)
-    {
+     public function actionUpdate($id)
+     {
         $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        $model->attributes = Yii::$app->request->post();  
+        @$model->cat_id = implode(",",Yii::$app->request->post('cat_id'));
+        $response =[];  
+        if ($model->save()) {
+            
+            $response['error'] = FALSE;
+            $response['data'] = $model;
+            return $response;
         } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+            $response['error'] = true;
+            $response['data'] = $model->errors;
+            return $response;
         }
-    }
+     }
 
     /**
      * Deletes an existing Book model.
@@ -113,7 +117,7 @@ class BookController extends Controller
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        //return $this->redirect(['index']);
     }
 
     /**
