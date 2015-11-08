@@ -169,7 +169,10 @@ libApp_book.controller('index', ['$scope','$rootScope', '$http', 'services', 'Fl
 	function($scope,$http,$routeParams,services,$location,book,Flash) {
 	$scope.message = 'Update Category';
 	var original = book.data;
-	$scope.flash = Flash;
+	$scope.flash = Flash;$scope.bookCatz = this;
+	services.getBooksCat().then(function(data){
+        $scope.bookCatz = data.data;
+    });	
 	$scope.book = angular.copy(original);
 	$scope.isClean = function() {
 		return angular.equals(original, $scope.book);
@@ -182,8 +185,6 @@ libApp_book.controller('index', ['$scope','$rootScope', '$http', 'services', 'Fl
 	function($scope,$http,$routeParams,services,$location,bookCat) {
 	$scope.message = 'Update category';
 	var original = bookCat.data;
-	
-	console.log(original);
 	$scope.bookCat = angular.copy(original);
 	$scope.isClean = function() {
 		return angular.equals(original, $scope.bookCat);
