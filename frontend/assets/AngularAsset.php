@@ -13,7 +13,8 @@ class AngularAsset extends AssetBundle
         'angular-strap/dist/angular-strap.js',
         'angular-animate/angular-animate.js',
         'angular-bootstrap/ui-bootstrap.min.js',
-        'angular-bootstrap/ui-bootstrap-tpls.min.js'
+        'angular-bootstrap/ui-bootstrap-tpls.min.js',
+        'ng-file-upload/ng-file-upload.min.js'
     ];
     public $jsOptions = [
         'position' => View::POS_HEAD,

@@ -118,22 +118,24 @@
         <div class="col-md-4">
         	<div class= "form-group" ng-class="{error: myForm.cover_photo.$invalid}">
 			<label>Cover Picture </label>
-			<div>
-			<input name="picture" ng-model="book.cover_photo" type= "file" class= "form-control" />
-			<span ng-show="myForm.cover_photo.$dirty && myForm.cover_photo.$invalid" class="help-inline">Picture Required</span>
-			</div>
+			
+			<input type="file" ngf-select ng-model="picFile" name="file"    
+             accept="image/*" ngf-max-size="2MB" required>
+      <i ng-show="myForm.file.$error.required">*required</i><br>
+      <i ng-show="myForm.file.$error.maxSize">File too large 
+          {{picFile.size / 1000000|number:1}}MB: max 2M</i>
+      <img ng-show="myForm.file.$valid" ngf-thumbnail="picFile" class="img-thumbnail"> <button ng-click="picFile = null" ng-show="picFile">Remove</button>
+			<span class="progress" ng-show="picFile.progress >= 0">
+        <div style="width:{{picFile.progress}}%" 
+            ng-bind="picFile.progress + '%'"></div>
+      </span>
+      <span ng-show="picFile.result">Upload Successful</span>
+      <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
 		</div>
         </div>
-    </div>
-		
-		
-		
-		
-		 <hr/>
-		
-	  
-		<a href="#/book/index" class="btn btn-danger">Cancel</a>
-		<button ng-click="createBook(book);" 
+    </div><hr/>
+	<a href="#/book/index" class="btn btn-danger">Cancel</a>
+		<button ng-click="uploadPic(picFile,book);" 
                 ng-disabled="myForm.$invalid"
                 type="submit" class="btn btn-primary">Submit</button>
         </div>
