@@ -12,6 +12,7 @@ AppAsset::register($this);
 <meta charset="<?= Yii::$app->charset ?>">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title ng-bind="title">My Angular Yii Application</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 <?php $this->head() ?>
 
 <script>paceOptions = {ajax: {trackMethods: ['GET', 'POST']}};</script>
@@ -27,7 +28,7 @@ AppAsset::register($this);
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span></button>
-                <a class="navbar-brand" href="#/">My Company</a>
+                <a class="navbar-brand" href="#/"><b>My</b>Library</a>
             </div>
             <div ng-class="!navCollapsed && 'in'" ng-click="navCollapsed=true" class="collapse navbar-collapse" >
                 <ul class="navbar-nav navbar-right nav">
@@ -60,13 +61,30 @@ AppAsset::register($this);
                     	</li>
                     </ul>
                 </li>
-                    <li data-match-route="/about">
+                
+                <li class="dropdown" uib-dropdown>
+                    <a role="button" class="dropdown-toggle" uib-dropdown-toggle>
+                        Lend a Book <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                       <li data-match-route="book/create_cat">
+                        	<a href="#">Lend a Book</a>
+                    	</li>
+                        <li data-match-route="book/categories">
+                        	<a href="#">Books out of Library</a>
+                    	</li>
+                    </ul>
+                </li>
+                <li data-match-route="/about">
+                        <a href="#">Manage Stock</a>
+                    </li>
+                    <!--<li data-match-route="/about">
                         <a href="#/about">About</a>
-                    </li>
+                    </li> -->
                     <li data-match-route="/contact">
-                        <a href="#/contact">Contact</a>
+                        <a href="#/contact">Contact Info</a>
                     </li>
-                    
+                   
                     <li ng-class="{active:isActive('/logout')}" ng-show="loggedIn()" ng-click="logout()"  class="ng-hide">
                         <a href="">Logout</a>
                     </li>

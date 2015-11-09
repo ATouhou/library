@@ -1,11 +1,30 @@
 
 <div class="row">
-    <h1>Hello {{ dashboard.username }}</h1>
-    Welcome to the secret page. <br>
-    <a class="btn btn-primary" href="#/book/create_cat">
-		<i class="glyphicon glyphicon-plus"></i> Create Category
-	</a>
-	<a class="btn btn-primary" href="#/book/create">
-		<i class="glyphicon glyphicon-plus"></i> Add Book
-	</a>
+    <!--<h3>Hello {{ dashboard.username }}</h3>-->
+    <div style="min-height:200px"></div>
+
+    
+    <div class="col-md-3" align="center">
+    	<a href="#/book/create"><i class="fa fa-book fa-4"></i>
+        <h3>Books</h3></a>
+    </div>
+    
+    <div class="col-md-3" align="center">
+    	<a href=""><i class="fa fa-hand-o-right fa-4"></i>
+        <h3>Lend</h3></a>
+    </div>
+    
+    <div class="col-md-3" align="center">
+    	<a href="#/book/create_cat"><i class="fa fa-list-alt fa-4"></i>
+        <h3>Categories</h3></a>
+    </div>
+    
+    
+    
+    <div class="col-md-3" align="center">
+    	<a href=""><i class="fa fa-cubes fa-4"></i>
+        <h3>Stock</h3></a>
+    </div>
+    
+    
 </div>

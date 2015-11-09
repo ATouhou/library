@@ -93,3 +93,18 @@ a.desc:after {
 .panel-default{ background:rgba(224, 248, 216, 0.26);-webkit-box-shadow: 0px 0px 10px 1px rgba(199,199,199,1);
 -moz-box-shadow: 0px 0px 10px 1px rgba(199,199,199,1);
 box-shadow: 0px 0px 10px 1px rgba(199,199,199,1);}
+.fa-2 {
+  font-size: 2em;
+}
+ .fa-3 {
+  font-size: 4em;
+}
+.fa-4 {
+  font-size: 7em;
+}
+.fa-5 {
+  font-size: 12em;
+}
+ .fa-6 {
+  font-size: 20em;
+}
