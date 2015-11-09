@@ -1,0 +1,18 @@
+<div id="flash-message-sucess" ng-show="{{successCls}}" class="alert alert-success"  ng-show="flash.getMessage()">
+  <p>
+    <a href="#clearAlertMessages" ng-click="flash.clearMessage($event);">
+      <strong>Success:</strong> {{flash.getMessage()}}
+      <span class="glyphicon glyphicon-remove" style="float:right"  aria-hidden="true"></span>
+      <span class="visuallyhidden">Click to hide message</span>
+    </a>
+  </p>
+</div>
+<div id="flash-message-error" ng-show="{{errorCls}}" class="alert alert-danger"  ng-show="flash.getMessage()">
+  <p>
+    <a href="#clearAlertMessages" ng-click="flash.clearMessage($event);">
+      <strong>Error:</strong> {{flash.getMessage()}}
+      <span class="glyphicon glyphicon-remove" style="float:right"  aria-hidden="true"></span>
+      <span class="visuallyhidden">Click to hide message</span>
+    </a>
+  </p>
+</div>
