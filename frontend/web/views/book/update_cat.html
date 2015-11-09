@@ -1,0 +1,26 @@
+<div>
+	<h1>BOOK CRUD</h1>
+	
+	<p>{{ message }}</p>
+	<form role="form" name="myForm">
+		<div class= "form-group" ng-class="{error: myForm.title.$invalid}">
+			<label> Title </label>
+			<div>
+			<input name="cat_name" ng-model="bookCat.cat_name" type= "text" class= "form-control" placeholder="Title" required/>
+			<span ng-show="myForm.cat_name.$dirty && myForm.cat_name.$invalid" class="help-inline">Title Required</span>
+			</div>
+		</div>
+		
+	    <div class= "form-group" ng-class="{error: myForm.shelf_id.$invalid}">
+			<label> Shelf No. </label>
+			<div>
+			<input name="shelfNo" ng-model="bookCat.shelf_id" type= "text" class= "form-control" placeholder="shelf no" required/>
+			<span ng-show="myForm.shelf_id.$dirty && myForm.shelf_id.$invalid" class="help-inline">Year Required</span>
+			</div>
+		</div>
+		<a href="#/book/categories" class="btn btn-default">Cancel</a> 
+		<button ng-click="updateBookCat(bookCat);" 
+                ng-disabled="isClean() || myForm.$invalid"
+                type="submit" class="btn btn-default">Submit</button>
+	</form>
+</div>
