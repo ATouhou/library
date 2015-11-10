@@ -73,6 +73,9 @@ class BookController extends Controller
      */
     public function actionCreate()
     {
+        print_r($_FILES);
+        print_r(Yii::$app->request->post());
+        exit;
         $model = new Book();
         $model->attributes = Yii::$app->request->post();
         $model->cat_id = implode(",",Yii::$app->request->post('cat_id'));

@@ -145,17 +145,43 @@ libApp_book.controller('index', ['$scope','$rootScope', '$http', 'services', 'Fl
 		}
 	};
 }])
-.controller('create', ['$scope', '$http', 'services','$location','book',
-	function($scope,$http,services,$location,book) {
+.controller('create', ['$scope', '$http', 'services','$location','book','Upload', '$timeout',
+	function($scope,$http,services,$location,book,Upload, $timeout) {
 	$scope.message = 'Look! I am an about page.';
-	$scope.createBook = function(book) {
+	/*$scope.createBook = function(book) {
         var results = services.createBook(book);
-		 
-    }
+	}*/
 	$scope.bookCatz = this;
 	services.getBooksCat().then(function(data){
         $scope.bookCatz = data.data;
     });	
+	
+	$scope.uploadPic = function(file,book) {
+		
+	var results = services.createBook(book);
+    file.upload = Upload.upload({
+		url: 'book/create', 
+		method: 'POST',
+		file: file,
+		sendFieldsAs: 'form',
+		fields: {
+			title: book.title,
+			description:book.description
+		}
+	});
+
+    file.upload.then(function (response) {
+      $timeout(function () {
+        file.result = response.data;
+      });
+    }, function (response) {
+      if (response.status > 0)
+        $scope.errorMsg = response.status + ': ' + response.data;
+    }, function (evt) {
+      // Math.min is to fix IE which reports 200% sometimes
+      file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+    });
+    }
 	  
 }])
 .controller('createCat', ['$scope', '$http', 'services','$location','bookCat', 

@@ -6,7 +6,8 @@ var libApp = angular.module('app', [
     'controllers',
     'libApp.book',
     'ngAnimate',
-    'ui.bootstrap'       //Our module frontend/web/js/controllers.js
+    'ui.bootstrap',
+    'ngFileUpload'       //Our module frontend/web/js/controllers.js
 ]);
 
 var libApp_book = angular.module('libApp.book', ['ngRoute']);
