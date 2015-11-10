@@ -157,19 +157,17 @@ libApp_book.controller('index', ['$scope','$rootScope', '$http', 'services', 'Fl
     });	
 	
 	$scope.uploadPic = function(file,book) {
-		$scope.createBook = function(book) {
-        var results = services.createBook(book);
-	}
+		
 	var results = services.createBook(book);
     file.upload = Upload.upload({
 		url: 'book/create', 
 		method: 'POST',
 		file: file,
-		/*sendFieldsAs: 'form',
+		sendFieldsAs: 'form',
 		fields: {
-			title: $scope.title,
-			description:$scope.description
-		}*/
+			title: book.title,
+			description:book.description
+		}
 	});
 
     file.upload.then(function (response) {
