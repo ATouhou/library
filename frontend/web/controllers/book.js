@@ -155,24 +155,28 @@ libApp_book.controller('index', ['$scope','$rootScope', '$http', 'services', 'Fl
 	services.getBooksCat().then(function(data){
         $scope.bookCatz = data.data;
     });	
-	
-	$scope.uploadPic = function(file,book) {
+	$scope.uploadPic =  function(file,book) {
+		services.createBook(file,book);
+	}
+	/*$scope.uploadPic = function(file,book) {
 		
-	var results = services.createBook(book);
+	//var results = services.createBook(book);
     file.upload = Upload.upload({
-		url: 'book/create', 
+		url: 'book/imageupload', 
 		method: 'POST',
 		file: file,
 		sendFieldsAs: 'form',
 		fields: {
-			title: book.title,
-			description:book.description
+			book: book,
+			//title: book.title,
+			//description: book.description
 		}
 	});
 
     file.upload.then(function (response) {
       $timeout(function () {
         file.result = response.data;
+		$location.path('/book/index')	
       });
     }, function (response) {
       if (response.status > 0)
@@ -181,7 +185,7 @@ libApp_book.controller('index', ['$scope','$rootScope', '$http', 'services', 'Fl
       // Math.min is to fix IE which reports 200% sometimes
       file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
     });
-    }
+    }*/
 	  
 }])
 .controller('createCat', ['$scope', '$http', 'services','$location','bookCat', 

@@ -1,6 +1,6 @@
 'use strict';
-libApp_book.factory("services", ['$http','$location','$route', 'Flash',
-	function($http,$location,$route,Flash) {
+libApp_book.factory("services", ['$http','$location','$route','$timeout', 'Flash','Upload',
+	function($http,$location,$route,$timeout,Flash,Upload) {
     var obj = {};
     obj.getBooks = function(){
         return $http.get('book/getbooks');
@@ -11,8 +11,33 @@ libApp_book.factory("services", ['$http','$location','$route', 'Flash',
 	obj.getBookCatById = function(catId){
         return $http.get('bookcategory/getcatbyid/?id='+catId);
     }
-	obj.createBook = function (book) {
-		return $http.post( 'book/create', book )
+	obj.createBook = function (file,book) {
+		
+		file.upload = Upload.upload({
+		url: 'book/imageupload', 
+		method: 'POST',
+		file: file,
+		sendFieldsAs: 'form',
+		fields: {
+			book: book,
+			//title: book.title,
+			//description: book.description
+		}
+	});
+
+    return file.upload.then(function (response) {
+      $timeout(function () {
+        file.result = response.data;
+		$location.path('/book/index')	
+      });
+    }, function (response) {
+      if (response.status > 0)
+        $scope.errorMsg = response.status + ': ' + response.data;
+    }, function (evt) {
+      // Math.min is to fix IE which reports 200% sometimes
+      file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+    });
+		/*return $http.post( 'book/create', book )
 			.then( successHandler )
 			.catch( errorHandler );
 		function successHandler( result ) {
@@ -23,7 +48,7 @@ libApp_book.factory("services", ['$http','$location','$route', 'Flash',
 			alert("Error data");
 			Flash.setMessage("Book not saved!",false);
 			$location.path('/book/index')
-		}
+		}*/
 	};
 	obj.createCategory = function (bookCategory) {
 		return $http.post( 'bookcategory/create', bookCategory )

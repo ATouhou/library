@@ -73,9 +73,9 @@ class BookController extends Controller
      */
     public function actionCreate()
     {
-        print_r($_FILES);
-        print_r(Yii::$app->request->post());
-        exit;
+        //print_r($_FILES);
+       // print_r(Yii::$app->request->post());
+       // exit;
         $model = new Book();
         $model->attributes = Yii::$app->request->post();
         $model->cat_id = implode(",",Yii::$app->request->post('cat_id'));
@@ -85,6 +85,43 @@ class BookController extends Controller
             return $model;
         }
     }
+	
+	public function actionImageupload()
+	{
+		//echo Yii::$app->basePath;exit;
+		$path = realpath( Yii::$app->basePath)."/images/";
+		//$path = "localhost/library_software/frontend/images/";
+		
+		$model = new Book();
+        $model->attributes = Yii::$app->request->post()['book'];
+		//print_r($model);exit;
+		
+		//echo Yii::$app->request->post()['book']['cat_id'];exit;
+        $model->cat_id = implode(",",$model['cat_id']);
+		
+		//print_r($model);exit;
+		$image = $_FILES['file']['name'];
+		$ext = end((explode(".", $image)));
+		if($ext=='jpg' || $ext=='png' || $ext=='gif' || $ext=='jpeg'){
+			$filename = Yii::$app->security->generateRandomString().".{$ext}";
+			$model->cover_photo = $filename;
+			if ($model->save()) {
+				move_uploaded_file($_FILES['file']['tmp_name'], $path.'/'.$filename);
+				return $model;
+			} else {
+				return $model;
+			}
+		}else{
+			$msg = 'File type not supported';
+			return $msg;
+		}
+		
+		
+		
+		/* print_r($_FILES);
+		print_r(Yii::$app->request->post()['book']);
+		exit; */
+	}
 
     /**
      * Updates an existing Book model.

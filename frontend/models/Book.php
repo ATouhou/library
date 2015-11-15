@@ -31,6 +31,8 @@ class Book extends \yii\db\ActiveRecord
     {
         return [
             [['title', 'author', 'description','publisher','cat_id', 'year','isbn'], 'required'],
+			//['cover_photo', 'file', 'extensions' => ['png', 'jpg', 'gif', 'jpeg'], 'maxSize' => 1024 * 1024 * 2],
+			[['cover_photo'], 'string'],
             [['description'], 'string'],
             [['year','pages','stock','author_id','shelf_id'], 'integer'],
             [['title','written_lang'], 'string', 'max' => 255],
