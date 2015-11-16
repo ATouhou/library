@@ -17,14 +17,14 @@
 			<label> Title </label>
 			<div>
 			<input name="cat_name" ng-model="bookCategory.cat_name" type= "text" class= "form-control" placeholder="Title" required/>
-			<span ng-show="myForm.cat_name.$dirty && myForm.cat_name.$invalid" class="help-inline">Title Required</span>
+			<span id="cat_name" ng-show="myForm.cat_name.$dirty && myForm.cat_name.$invalid" class="help-inline">Title Required</span>
 			</div>
 		</div>
 		<div class= "form-group" ng-class="{error: myForm.shelf_id.$invalid}">
 			<label> Shelf No. </label>
 			<div>
 			<input name="shelf_id" ng-model="bookCategory.shelf_id" type= "text" class= "form-control" placeholder="shelf no" required/>
-			<span ng-show="myForm.shelfNo.$dirty && myForm.shelf_id.$invalid" class="help-inline">Year Required</span>
+			<span id="shelf_id" ng-show="myForm.shelfNo.$dirty && myForm.shelf_id.$invalid" class="help-inline">Year Required</span>
 			</div>
 		</div>
 	 

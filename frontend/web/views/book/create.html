@@ -1,4 +1,5 @@
 <div>
+<action-notification></action-notification>
 	<form role="form" name="myForm">
     <div class="panel panel-default">
   <div class="panel-heading">Add Book</div>
@@ -59,7 +60,7 @@
 			<label>Publication  Year </label>
 			<div>
 			<input name="year" ng-model="book.year" type= "text" class= "form-control" placeholder="Year" required/>
-			<span ng-show="myForm.year.$dirty && myForm.year.$invalid" class="help-inline">Year Required</span>
+			<span id="year" ng-show="myForm.year.$dirty && myForm.year.$invalid" class="help-inline">Year Required</span>
 			</div>
 		</div>
         </div>
@@ -102,7 +103,7 @@
 			<label>Pages</label>
 			<div>
 			<input name="pages" ng-model="book.pages" type= "text" class= "form-control" placeholder="Pages" required/>
-			<span ng-show="myForm.pages.$dirty && myForm.pages.$invalid" class="help-inline">Page Required</span>
+			<span id="pages" ng-show="myForm.pages.$dirty && myForm.pages.$invalid" class="help-inline">Page Required</span>
 			</div>
 		</div>
         </div>
@@ -111,7 +112,7 @@
 			<label>Stock</label>
 			<div>
 			<input name="stock" ng-model="book.stock" type= "text" class= "form-control" placeholder="Stock" required/>
-			<span ng-show="myForm.stock.$dirty && myForm.stock.$invalid" class="help-inline">Stock Required</span>
+			<span id="stock" ng-show="myForm.stock.$dirty && myForm.stock.$invalid" class="help-inline">Stock Required</span>
 			</div>
 		</div>
         </div>
@@ -135,7 +136,7 @@
         </div>
     </div><hr/>
 	<a href="#/book/index" class="btn btn-danger">Cancel</a>
-		<button ng-click="uploadPic(picFile,book);" 
+		<button ng-click="saveBook(picFile,book);" 
                 ng-disabled="myForm.$invalid"
                 type="submit" class="btn btn-primary">Submit</button>
         </div>

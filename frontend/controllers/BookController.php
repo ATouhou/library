@@ -71,7 +71,7 @@ class BookController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    /* public function actionCreate()
     {
         //print_r($_FILES);
        // print_r(Yii::$app->request->post());
@@ -84,9 +84,9 @@ class BookController extends Controller
         } else {
             return $model;
         }
-    }
+    } */
 	
-	public function actionImageupload()
+	public function actionCreate()
 	{
 		//echo Yii::$app->basePath;exit;
 		$path = realpath( Yii::$app->basePath)."/images/";
@@ -105,15 +105,26 @@ class BookController extends Controller
 		if($ext=='jpg' || $ext=='png' || $ext=='gif' || $ext=='jpeg'){
 			$filename = Yii::$app->security->generateRandomString().".{$ext}";
 			$model->cover_photo = $filename;
+			
 			if ($model->save()) {
 				move_uploaded_file($_FILES['file']['tmp_name'], $path.'/'.$filename);
-				return $model;
+				
+				return [
+				'error'=>false,
+				'data'=>$model
+				];
 			} else {
-				return $model;
+				return [
+				'error'=>true,
+				'data'=>$model->errors
+				];
+
 			}
 		}else{
-			$msg = 'File type not supported';
-			return $msg;
+			return [
+				'error'=>true,
+				'data'=>['photo'=>'File type not allowed.']
+				];
 		}
 		
 		

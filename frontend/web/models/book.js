@@ -14,7 +14,7 @@ libApp_book.factory("services", ['$http','$location','$route','$timeout', 'Flash
 	obj.createBook = function (file,book) {
 		
 		file.upload = Upload.upload({
-		url: 'book/imageupload', 
+		url: 'book/create', 
 		method: 'POST',
 		file: file,
 		sendFieldsAs: 'form',
@@ -27,8 +27,24 @@ libApp_book.factory("services", ['$http','$location','$route','$timeout', 'Flash
 
     return file.upload.then(function (response) {
       $timeout(function () {
-        file.result = response.data;
-		$location.path('/book/index')	
+		    console.log(response.data.error);
+		  if(response.data.error)
+		  {
+			  var errStr=null;
+			  angular.forEach(response.data.data,function(value,key){
+				  console.log(key);
+				  document.getElementById(key).innerHTML = value ;
+				  $("#"+key).removeClass( "ng-hide" );
+			  });
+			  console.log(errStr);
+			  Flash.setMessage(errStr,false);
+				$location.path('/book/create');		 
+		  }else{
+			 file.result = response.data;
+			 Flash.setMessage("Book saved!",true);
+			 $location.path('/book/index')	
+		  }
+       
       });
     }, function (response) {
       if (response.status > 0)
@@ -55,8 +71,27 @@ libApp_book.factory("services", ['$http','$location','$route','$timeout', 'Flash
 			.then( successHandler )
 			.catch( errorHandler );
 		function successHandler( result ) {
-			Flash.setMessage("Book category added!",true);
-			$location.path('/book/categories');			
+			//console.log(result.data);
+			if(result.data.error)
+			{
+			  var errStr=null;
+			  angular.forEach(result.data.data,function(value,key){
+				  console.log(key);
+				  document.getElementById(key).innerHTML = value ;
+				  $("#"+key).removeClass( "ng-hide" );
+			  });
+			  console.log(errStr);
+			  Flash.setMessage(errStr,false);
+				$location.path('/book/create_cat');		 
+		   }else{
+			 file.result = result.data;
+			 Flash.setMessage("Book category added!",true);
+			 $location.path('/book/categories');		
+		  }
+		  
+		  
+			//Flash.setMessage("Book category added!",true);
+			//$location.path('/book/categories');			
 		}
 		function errorHandler( result ){
 			alert("Error data");

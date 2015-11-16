@@ -79,9 +79,17 @@ class BookcategoryController extends Controller
         $model = new Bookcategory();
         $model->attributes = Yii::$app->request->post();
         if ($model->save()) {
-            return $model;
+			return [
+				'error'=>false,
+				'data'=>$model
+				];
+            //return $model;
         } else {
-            return $model->errors;
+			return [
+				'error'=>true,
+				'data'=>$model->errors
+				];
+            //return $model->errors;
         }
     }
 
