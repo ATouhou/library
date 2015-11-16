@@ -56,6 +56,10 @@ libApp_book.config(['$routeProvider', function($routeProvider) {
 		templateUrl: 'views/book/view_categories.html',
 		controller: 'delete',
 	})
+	.when('/book/lend_book', {
+		templateUrl: 'views/book/lend_book.html',
+		controller: '',
+	})
 	.otherwise({
 		redirectTo: '/book/index'
 	});

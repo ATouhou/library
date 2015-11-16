@@ -68,7 +68,7 @@ AppAsset::register($this);
                     </a>
                     <ul class="dropdown-menu">
                        <li data-match-route="book/create_cat">
-                        	<a href="#">Lend a Book</a>
+                        	<a href="#/book/lend_book">Lend a Book</a>
                     	</li>
                         <li data-match-route="book/categories">
                         	<a href="#">Books out of Library</a>
