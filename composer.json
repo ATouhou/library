@@ -20,7 +20,8 @@
         "yiisoft/yii2-swiftmailer": "*",
         "bower-asset/angular": "*",
         "bower-asset/angular-route": "*",
-        "bower-asset/angular-strap": "*"
+        "bower-asset/angular-strap": "*",
+         "bower-asset/ng-file-upload": "*"
 
     },
     "require-dev": {
