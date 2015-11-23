@@ -23,7 +23,7 @@ class LendingbookController extends Controller
         $behaviors = parent::behaviors();
         $behaviors['authenticator'] = [
             'class' => HttpBearerAuth::className(),
-            'only' => ['getbooks'],
+            'only' => ['index'],
         ];
         $behaviors['contentNegotiator'] = [
             'class' => ContentNegotiator::className(),
@@ -33,10 +33,10 @@ class LendingbookController extends Controller
         ];
         $behaviors['access'] = [
             'class' => AccessControl::className(),
-            'only' => ['getbooks'],
+            'only' => ['index'],
             'rules' => [
                 [
-                    'actions' => ['getbooks'],
+                    'actions' => ['index'],
                     'allow' => true,
                     'roles' => ['@'],
                 ],
@@ -94,6 +94,7 @@ class LendingbookController extends Controller
 	{
 		$model = LendBook::findOne($id);
         $model->attributes = Yii::$app->request->post();  
+		$model->returningDate = date('Y-m-d',strtotime($model->returningDate));
 		if ($model->save()) {				
 			return [
 				'error'=>false,
