@@ -54,6 +54,13 @@ class BookController extends Controller
         
         return $searchModel->search();
     }
+	
+	public function actionGetbooklist()
+	{
+		$bookList = Book::getAllBooks();
+		
+		return $bookList;
+	}
 
     /**
      * Displays a single Book model.

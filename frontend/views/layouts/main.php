@@ -70,6 +70,9 @@ AppAsset::register($this);
                        <li data-match-route="book/create_cat">
                         	<a href="#/book/lend_book">Lend a Book</a>
                     	</li>
+						<li data-match-route="book/create_cat">
+                        	<a href="#/book/view_lending_books">View Lending Books</a>
+                    	</li>
                         <li data-match-route="book/categories">
                         	<a href="#">Books out of Library</a>
                     	</li>

@@ -1,0 +1,137 @@
+<div>
+	<form role="form" name="myForm">
+    <div class="panel panel-default">
+		
+  <div class="panel-heading">Update Lending Book</div>
+  <div class="panel-body">
+	  <div class="row"><action-notification></action-notification></div>
+  	<div class="row">
+    	<div class="col-md-4">
+        	<div class= "form-group" ng-class="{error: myForm.title.$invalid}">
+			<label> Title </label>
+			<div>
+			<input name="title" ng-model="book.title" type= "text" class= "form-control" placeholder="Title" required/>
+			<span ng-show="myForm.title.$dirty && myForm.title.$invalid" class="help-inline">Title Required</span>
+			</div>
+		</div>
+        </div>
+        <div class="col-md-4">
+        	<div class= "form-group">
+			<label> Description </label>
+			<div>
+			<textarea name="description" ng-model="book.description" class= "form-control" placeholder= "Description"></textarea>
+			</div>
+		</div>
+        </div>
+        <div class="col-md-4">
+        	<div class= "form-group" ng-class="{error: myForm.author.$invalid}">
+			<label> Author </label>
+			<div>
+			<input name="author" ng-model="book.author" type= "text" class= "form-control" placeholder="Author" required/>
+			<span ng-show="myForm.author.$dirty && myForm.author.$invalid" class="help-inline">Author Required</span>
+			</div>
+		</div>
+        </div>
+    </div>
+    
+    <div class="row">
+    	<div class="col-md-4">
+        	<div class= "form-group" ng-class="{error: myForm.publisher.$invalid}">
+			<label> Publisher </label>
+			<div>
+			<input name="publisher" ng-model="book.publisher" type= "text" class= "form-control" placeholder="Publisher" required/>
+			<span ng-show="myForm.publisher.$dirty && myForm.publisher.$invalid" class="help-inline">Publisher Required</span>
+			</div>
+		</div>
+        </div>
+        <div class="col-md-4">
+        	<div class= "form-group" ng-class="{error: myForm.publisher.$invalid}">
+			<label>Select a Category</label>
+			<div>
+			<select name="cat_id" ng-model="book.cat_id" type= "text" class= "form-control" placeholder="Category"
+			   multiple>
+			<option ng-repeat="category in bookCatz" value="{{category.cat_id}}">{{category.cat_name}}</option>
+			</select>
+			<span ng-show="myForm.cat_id.$dirty && myForm.cat_id.$invalid" class="help-inline">Publisher Required</span>
+			</div>
+		</div>
+        </div>
+        <div class="col-md-4">
+        	<div class= "form-group" ng-class="{error: myForm.year.$invalid}">
+			<label>Publication  Year </label>
+			<div>
+			<input name="year" ng-model="book.year" type= "text" class= "form-control" placeholder="Year" required/>
+			<span ng-show="myForm.year.$dirty && myForm.year.$invalid" class="help-inline">Year Required</span>
+			</div>
+		</div>
+        </div>
+    </div>
+    
+    <div class="row">
+    	<div class="col-md-4">
+        	<div class= "form-group" ng-class="{error: myForm.written_lang.$invalid}">
+			<label>Written Language </label>
+			<div>
+			<input name="written_lang" ng-model="book.written_lang" type= "text" class= "form-control" placeholder="Language" required/>
+			<span ng-show="myForm.written_lang.$dirty && myForm.written_lang.$invalid" class="help-inline">Language Required</span>
+			</div>
+		</div>
+        </div>
+        <div class="col-md-4">
+        	<div class= "form-group" ng-class="{error: myForm.book_number.$invalid}">
+			<label>Book Number</label>
+			<div>
+			<input name="book_number" ng-model="book.book_number" type= "text" class= "form-control" placeholder="Book Number" required/>
+			<span ng-show="myForm.book_number.$dirty && myForm.book_number.$invalid" class="help-inline">Book Number Required</span>
+			</div>
+		</div>
+        </div>
+        <div class="col-md-4">
+        	<div class= "form-group" ng-class="{error: myForm.isbn.$invalid}">
+			<label>ISBN</label>
+			<div>
+			<input name="isbn" ng-model="book.isbn" type= "text" class= "form-control" placeholder="ISBN" required/>
+			<span ng-show="myForm.isbn.$dirty && myForm.isbn.$invalid" class="help-inline">ISBN Required</span>
+			</div>
+		</div>
+        </div>
+    </div>
+    
+    <div class="row">
+    	
+        <div class="col-md-4">
+        	<div class= "form-group" ng-class="{error: myForm.pages.$invalid}">
+			<label>Pages</label>
+			<div>
+			<input name="pages" ng-model="book.pages" type= "text" class= "form-control" placeholder="Pages" required/>
+			<span ng-show="myForm.pages.$dirty && myForm.pages.$invalid" class="help-inline">Page Required</span>
+			</div>
+		</div>
+        </div>
+        <div class="col-md-4">
+        	<div class= "form-group" ng-class="{error: myForm.stock.$invalid}">
+			<label>Stock</label>
+			<div>
+			<input name="stock" ng-model="book.stock" type= "text" class= "form-control" placeholder="Stock" required/>
+			<span ng-show="myForm.stock.$dirty && myForm.stock.$invalid" class="help-inline">Stock Required</span>
+			</div>
+		</div>
+        </div>
+        <div class="col-md-4">
+        	<div class= "form-group" ng-class="{error: myForm.cover_photo.$invalid}">
+			<label>Cover Picture </label>
+			<div>
+			<input name="picture" ng-model="book.cover_photo" type= "file" class= "form-control" />
+			<span ng-show="myForm.cover_photo.$dirty && myForm.cover_photo.$invalid" class="help-inline">Picture Required</span>
+			</div>
+		</div>
+        </div>
+    </div> <hr/>
+	<a href="#/book/index" class="btn btn-danger">Cancel</a>
+		<button ng-click="updateBook(book);" 
+                ng-disabled="myForm.$invalid"
+                type="submit" class="btn btn-primary">Submit</button>
+        </div>
+        </div>
+	</form>
+</div>

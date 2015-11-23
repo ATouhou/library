@@ -40,6 +40,13 @@ class Book extends \yii\db\ActiveRecord
         ];
     }
 
+	public static function getAllBooks()
+	{
+		$query = self::find()->all();
+		return $query;
+	}
+	
+	
     /**
      * @inheritdoc
      */
