@@ -58,7 +58,22 @@ libApp_book.config(['$routeProvider', function($routeProvider) {
 	})
 	.when('/book/lend_book', {
 		templateUrl: 'views/book/lend_book.html',
-		controller: '',
+		controller: 'createlendbook',
+	})
+	.when('/book/view_lending_books', {
+		templateUrl: 'views/book/view_lending_books.html',
+		controller: 'lendbookindex',
+		//title: 'Library Management'
+	})
+	.when('/book/update_lending_book/:bookId', {
+		templateUrl: 'views/book/lend_book.html',
+		controller: 'update_lending_book',
+		resolve: {
+          book: function(services, $route){
+            var bookId = $route.current.params.bookId;
+            return services.getLendingBookById(bookId);
+          }
+        }
 	})
 	.otherwise({
 		redirectTo: '/book/index'
@@ -149,6 +164,23 @@ libApp_book.controller('index', ['$scope','$rootScope', '$http', 'services', 'Fl
 		}
 	};
 }])
+.controller('lendbookindex', ['$scope', '$http', 'services','Flash', 
+	function($scope,$http,services,Flash) {
+	$scope.message = 'Lending Book list here';
+	$scope.lendingBooks = this;
+	$scope.flash = Flash;
+	services.getLendingBookList().then(function(data){
+        $scope.lendingBooks = data.data;
+		
+    });	
+	
+	$scope.deleteLendingBook = function(bookCatID) {
+		if(confirm("Are you sure to delete book number: " + bookCatID)==true && bookCatID>0){
+			services.deleteLendingBook(bookCatID);	
+			//$route.reload();
+		}
+	};
+}])
 .controller('create', ['$scope', '$http', 'services','$location','book','Upload', '$timeout',
 	function($scope,$http,services,$location,book,Upload, $timeout) {
 	$scope.message = 'Look! I am an about page.';
@@ -158,6 +190,17 @@ libApp_book.controller('index', ['$scope','$rootScope', '$http', 'services', 'Fl
     });	
 	$scope.saveBook =  function(file,book) {
 		services.createBook(file,book);
+	}
+}])
+.controller('createlendbook', ['$scope', '$http', 'services','$location',
+	function($scope,$http,services,$location) {
+	//$scope.message = 'Look! I am an about page.';
+	$scope.bookList = this;
+	services.getBookList().then(function(data){
+        $scope.bookList = data.data;
+    });	
+	$scope.saveLandingBook =  function(book) {
+		services.createLandingBook(book);
 	}
 }])
 .controller('createCat', ['$scope', '$http', 'services','$location','bookCat', 
@@ -183,6 +226,30 @@ libApp_book.controller('index', ['$scope','$rootScope', '$http', 'services', 'Fl
         var results = services.updateBook(book);
     } 
 }])
+
+.controller('update_lending_book', ['$scope', '$http', '$routeParams', 'services','$location','book','Flash', 
+	function($scope,$http,$routeParams,services,$location,book,Flash) {
+	$scope.message = 'Update Lending Book';
+	var original = book.data;
+	$scope.flash = Flash;$scope.bookCatz = this;
+	services.getBooksCat().then(function(data){
+        $scope.bookCatz = data.data;
+    });	
+	$scope.bookList = this;
+	services.getBookList().then(function(data){
+        $scope.bookList = data.data;
+    });	
+	$scope.book = angular.copy(original);
+	//console.log($scope.book);
+	
+	$scope.isClean = function() {
+		return angular.equals(original, $scope.book);
+	}
+	$scope.updateLandingBook = function(book) {	
+        var results = services.updateLandingBook(book);
+    } 
+}])
+
 .controller('updateCat', ['$scope', '$http', '$routeParams', 'services','$location','bookCat', 
 	function($scope,$http,$routeParams,services,$location,bookCat) {
 	$scope.message = 'Update category';
